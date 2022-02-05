@@ -1,10 +1,22 @@
 {
+  "bundleDependencies": false,
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.25.0",
     "buffer-xor": "^2.0.2",
     "dbus-next": "^0.8.1",
-    "fs": "0.0.1-security",
     "lodash": "^4.17.19",
     "mqtt": "^3.0.0"
-  }
+  },
+  "deprecated": false,
+  "description": "Plejd MQTT Gateway",
+  "keywords": [
+    "plejd",
+    "mqtt"
+  ],
+  "main": "main.js",
+  "name": "plejd2mqtt",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "version": "1.0"
 }
