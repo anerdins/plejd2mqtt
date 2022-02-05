@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Plejd MQTT Gateway",
   "main": "main.js",
-  "dependencies": {
-    "nibepi": "^1.0.2"
-  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
