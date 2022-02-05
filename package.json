@@ -1,5 +1,5 @@
 {
-  "bundleDependencies": false,
+  "author":"Thomas Lovén",
   "dependencies": {
     "axios": "^0.25.0",
     "buffer-xor": "^2.0.2",
