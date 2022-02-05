@@ -1,5 +1,23 @@
 {
-  "author":"Thomas Lovén",
+  "name": "plejd2mqtt",
+  "version": "1.0.0",
+  "description": "Plejd MQTT Gateway",
+  "main": "main.js",
+  "dependencies": {
+    "nibepi": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anerdins/plejd2mqtt.git"
+  },
+  "keywords": [
+    "plejd"
+  ],
+  "author": "Fredrik Anerdin",
   "dependencies": {
     "axios": "^0.25.0",
     "buffer-xor": "^2.0.2",
@@ -7,16 +25,9 @@
     "lodash": "^4.17.19",
     "mqtt": "^3.0.0"
   },
-  "deprecated": false,
-  "description": "Plejd MQTT Gateway",
-  "keywords": [
-    "plejd",
-    "mqtt"
-  ],
-  "main": "main.js",
-  "name": "plejd2mqtt",
-  "scripts": {
-    "start": "node main.js"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anerdins/plejd2mqtt/issues"
   },
-  "version": "1.0"
+  "homepage": "https://github.com/anerdins/plejd2mqtt#readme"
 }
