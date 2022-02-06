@@ -3,25 +3,48 @@ const mqtt = require('./mqtt');
 const fs = require('fs');
 const PlejdService = require('./ble.bluez');
 const SceneManager = require('./scene.manager');
-
 const version = "0.4.7";
+var configPi;
+const path = "/etc/nibepi"
+if (!fs.existsSync(path)) {
+    exec(`sudo mount -o remount,rw / && sudo mkdir ${path} && sudo chown ${process.env.USER}:${process.env.USER} ${path}`, function(error, stdout, stderr) {
+        if(error) {
+            exec(`mkdir ${path} && chown ${process.env.USER}:${process.env.USER} ${path}`, function(error, stdout, stderr) {
+                if(error) {console.log('Error creating config directory')} else { console.log('Created config directory')}
+            });
+        } else {
+            console.log(`Configuration directory created ${path}`);
+        }
+    });
+}
 
+function requireF(modulePath){ // force require
+    try {
+     return require(modulePath);
+    }
+    catch (e) {
+        console.log('Config file not found, loading default.');
+        let conf = require(__dirname+'/default.json')
+        fs.writeFile(path+'/config.json', JSON.stringify(conf,null,2), function(err) {
+            if(err) console.log(err)
+        });
+        return conf;
+    }
+}
+configPi = requireF(path+'/config.json');
 async function main() {
   console.log('starting Plejd add-on v. ' + version);
 
-  // const rawData = fs.readFileSync('/data/plejd.json');
-  // const config = JSON.parse(rawData);
-
   const config = {
-    site: process.env.PLEJD_SITE || "Default Site",
-    username: process.env.PLEJD_USERNAME || "",
-    password: process.env.PLEJD_PASSWORD || "",
-    mqttBroker: process.env.MQTT_BROKER || "mqtt://localhost",
-    mqttUsername: process.env.MQTT_USERNAME || "",
-    mqttPassword: process.env.MQTT_PASSWORD || "",
+    site: configPi.plejd.cloud_name || "Default Site",
+    username: configPi.plejd.cloud_user || "",
+    password: configPi.plejd.cloud_pass || "",
+    mqttBroker: `mqtt://${configPi.plejd.host}:${configPi.plejd.port}` || "mqtt://localhost",
+    mqttUsername: configPi.plejd.user || "",
+    mqttPassword: configPi.plejd.pass || "",
     includeRoomsAsLights: process.env.PLEJD_INCLUDE_ROOMS_AS_LIGHTS || false,
-    connectionTimeout: process.env.BLUETOOTH_TIMEOUT || 2,
-    writeQueueWaitTime: process.env.BLUETOOTH_WAIT || 400,
+    connectionTimeout: process.env.BLUETOOTH_TIMEOUT || 4,
+    writeQueueWaitTime: process.env.BLUETOOTH_WAIT || 600,
   }
 
   if (!config.connectionTimeout) {
