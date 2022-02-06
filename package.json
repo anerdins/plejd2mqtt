@@ -20,7 +20,7 @@
     "buffer-xor": "^2.0.2",
     "dbus-next": "^0.8.1",
     "lodash": "^4.17.19",
-    "mqtt": "^3.0.0"
+    "mqtt": "^4.3.4"
   },
   "license": "ISC",
   "bugs": {
